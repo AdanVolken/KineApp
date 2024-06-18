@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KineApp.Views.PaginaPrincipal">
+    <Grid BackgroundColor="White">
+        <!-- Barra superior -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="#6b47e9" HeightRequest="60">
+            <Button x:Name="btnCliente" Text="Cliente" TextColor="White" BackgroundColor="#6b47e9" HorizontalOptions="Start" Padding="20,0,10,0" FontFamily="monserat" FontSize="15" />
+            <Button x:Name="btnTurno" Text="Turnos" TextColor="White" BackgroundColor="#6b47e9" HorizontalOptions="Start" FontFamily="monserat" FontSize="15" />
+        </StackLayout>
+
+        <!-- Contenido principal -->
+        <ContentView Grid.Row="1" x:Name="MainContentView">
+            <ScrollView>
+                <StackLayout>
+                    <Image Source="Resources/Images/cuerpo_humano.png" Aspect="AspectFit" Margin="10"/>
+                    <Button Text="1 - Cabeza y cuello" Margin="10"/>
+                    <Button Text="2 - Tronco" Margin="10"/>
+                    <Button Text="3 - Espalda alta, hombro y brazo" Margin="10"/>
+                    <Button Text="4 - Antebrazo y mano" Margin="10"/>
+                    <Button Text="5 - Tronco inferior" Margin="10"/>
+                    <Button Text="6 - Cadera, muslo y rodilla" Margin="10"/>
+                    <Button Text="7 - Pierna, Tobillo y Pie" Margin="10"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentView>
+
+        <!-- Barra inferior -->
+        <StackLayout Grid.Row="2" Orientation="Horizontal" BackgroundColor="#6b47e9" HeightRequest="60">
+            <Button x:Name="btnMapa" Text="Mapa" TextColor="White" BackgroundColor="#6b47e9" HorizontalOptions="FillAndExpand" />
+            <Button x:Name="btnMusculo" Text="Musculo" TextColor="White" BackgroundColor="#6b47e9" HorizontalOptions="FillAndExpand" Clicked="btnMusculo_Clicked" />
+            <Button x:Name="btnSintomas" Text="Sintoma" TextColor="White" BackgroundColor="#6b47e9" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </Grid>
+</ContentPage>
