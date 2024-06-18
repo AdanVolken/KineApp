@@ -11,5 +11,6 @@ namespace KineApp.Model
         public int IdSintoma {  get; set; }
         public int IdParte { get; set; }
         public string Nivel { get; set; }
+
     }
 }
