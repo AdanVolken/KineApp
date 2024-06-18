@@ -1,4 +1,4 @@
-using KineApp.View;
+using KineApp.Views;
 using Microsoft.Maui.Controls;
 using System;
 

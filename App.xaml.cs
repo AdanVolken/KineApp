@@ -9,7 +9,7 @@ namespace KineApp
         public App()
         {
             InitializeComponent();
-            SQLitePCL.Batteries_V2.Init();
+
             MainPage = new NavigationPage(new PaginaPrincipal());
         }
     }

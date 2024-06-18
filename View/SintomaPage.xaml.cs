@@ -1,28 +1,48 @@
-using KineApp.DataAcces;
+using Microsoft.Maui.Controls;
 using KineApp.Model;
+using KineApp.DataAcces;
+using System;
+using System.Collections.Generic;
 
-namespace KineApp.View;
-
-public partial class SintomaPage : ContentPage
+namespace KineApp.Views
 {
-	private KineDBconexion _dbconexion;
-	public SintomaPage()
-	{
-		InitializeComponent();
-		_dbconexion = new KineDBconexion();
-	}
-
-    protected override void OnAppearing()
+    public partial class SintomaPage : ContentPage
     {
-        base.OnAppearing();
-        LoadData();
-    }
+        private KineDBconexion _databaseService;
 
-	private void LoadData() 
-	{
-		var sintomas = _dbconexion.GetItems<SintomaModel>();
+        public SintomaPage()
+        {
+            InitializeComponent();
+            _databaseService = new KineDBconexion();
+        }
 
-        SintomasCollectionView.SelectedItem = sintomas;
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadData();
+        }
 
+        private void LoadData()
+        {
+            try
+            {
+                // Obtener datos de la tabla Sintoma
+                var sintomas = _databaseService.GetItems<SintomaModel>();
+                Console.WriteLine($"Número de síntomas obtenidos: {sintomas.Count}");
+
+                // Verificar que se obtienen datos
+                foreach (var sintoma in sintomas)
+                {
+                    Console.WriteLine($"Sintoma: {sintoma.Nombre} - {sintoma.Descri}");
+                }
+
+                // Enlazar los datos al CollectionView
+                SintomasCollectionView.ItemsSource = sintomas;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error cargando datos: {ex.Message}");
+            }
+        }
     }
 }

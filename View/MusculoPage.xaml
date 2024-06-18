@@ -1,22 +1,24 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KineApp.Views.MusculoPage">
-    
+             x:Class="KineApp.Views.MusculoPage"
+             Title="MusculoPage"
+             NavigationPage.HasNavigationBar="False">
+
     <StackLayout Padding="10">
         <Label Text="Lista de Músculos"
                FontSize="24"
                HorizontalOptions="Center" />
 
-        <CollectionView x:Name="MusculosCollectionView">
+        <CollectionView x:Name="MusculosCollectionView"
+                        VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                        <StackLayout Padding="10" Orientation="Vertical">
-                            <Label Text="{Binding Nombre}"
+                    <StackLayout Padding="10" Orientation="Vertical">
+                        <Label Text="{Binding Nombre}"
                                FontSize="20" />
-                            <!-- Aquí puedes agregar más detalles si lo deseas -->
-                        </StackLayout>
-                    </DataTemplate>
+                        <!-- Aquí puedes agregar más detalles si lo deseas -->
+                    </StackLayout>
+                </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
     </StackLayout>
