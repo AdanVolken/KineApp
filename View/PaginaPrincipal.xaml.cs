@@ -20,5 +20,12 @@ namespace KineApp.Views
         {
             await Navigation.PushAsync(new SintomaPage());
         }
+
+        private async void ParteButton_Clicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            int parteId = int.Parse(button.CommandParameter.ToString());
+            await Navigation.PushAsync(new ParteDetallePage(parteId));
+        }
     }
 }
