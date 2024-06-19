@@ -61,7 +61,7 @@ namespace KineApp.Views
             }
         }
 
-        // Lo que hace es agrandar la imagen en ptra pagina 
+        // Lo que hace es agrandar la imagen en pantalla completa  
         private void OnImageTapped(object sender, EventArgs e)
         {
             if (ParteImage.Source != null)
