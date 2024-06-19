@@ -5,13 +5,18 @@
              Title="Parte Detalle">
     <ScrollView>
         <StackLayout Padding="10">
-            <Image x:Name="ParteImage"  Aspect="AspectFit" Margin="0,0,0,10"/>
+            <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImageTapped" />
+                </Image.GestureRecognizers>
+            </Image>
             <Label Text="Músculos y Síntomas"
                    FontSize="24"
                    HorizontalOptions="Center" />
 
             <Label Text="Músculos"
-                   FontSize="20"
+                   FontSize="25"
+                   TextColor="#6b47e9"
                    FontAttributes="Bold"
                    Margin="0,10,0,0" />
             <CollectionView x:Name="MusculosCollectionView" >
@@ -26,7 +31,8 @@
             </CollectionView>
 
             <Label Text="Síntomas"
-                   FontSize="20"
+                   FontSize="25"
+                   TextColor="#6b47e9"
                    FontAttributes="Bold"
                    Margin="0,20,0,0" />
             <CollectionView x:Name="SintomasCollectionView" HeightRequest="200">

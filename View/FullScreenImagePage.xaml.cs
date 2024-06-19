@@ -1,9 +1,13 @@
-namespace KineApp.View;
+using Microsoft.Maui.Controls;
 
-public partial class FullScreenImagePage : ContentPage
+namespace KineApp.Views
 {
-	public FullScreenImagePage()
-	{
-		InitializeComponent();
-	}
+    public partial class FullScreenImagePage : ContentPage
+    {
+        public FullScreenImagePage(ImageSource imageSource)
+        {
+            InitializeComponent();
+            FullScreenImage.Source = imageSource;
+        }
+    }
 }

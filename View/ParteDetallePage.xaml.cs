@@ -60,5 +60,14 @@ namespace KineApp.Views
                 Console.WriteLine($"Error cargando datos: {ex.Message}");
             }
         }
+
+        // Lo que hace es agrandar la imagen en ptra pagina 
+        private void OnImageTapped(object sender, EventArgs e)
+        {
+            if (ParteImage.Source != null)
+            {
+                Navigation.PushAsync(new FullScreenImagePage(ParteImage.Source));
+            }
+        }
     }
 }
