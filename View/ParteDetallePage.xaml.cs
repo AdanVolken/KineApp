@@ -4,6 +4,7 @@ using KineApp.DataAcces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace KineApp.Views
 {
@@ -29,6 +30,15 @@ namespace KineApp.Views
         {
             try
             {
+                // Cargar imagen de la parte
+                var parte = _databaseService.GetItems<ParteModel>()
+                                            .FirstOrDefault(p => p.IdParte == _parteId);
+                if (parte != null && parte.ImgParte != null)
+                {
+                    Console.WriteLine($"Imagen de parte: {parte.ImgParte.Length} bytes");
+                    ParteImage.Source = ImageSource.FromStream(() => new MemoryStream(parte.ImgParte));
+                }
+
                 // Obtener músculos relacionados con la parte
                 var musculos = _databaseService.GetItems<MusculoModel>()
                                                .Where(m => m.IdParte == _parteId)

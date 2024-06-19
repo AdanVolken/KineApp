@@ -58,6 +58,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Update="View\FullScreenImagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\MusculoIdPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\MusculoPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -65,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\ParteDetallePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\SintomaIdPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\SintomaPage.xaml">

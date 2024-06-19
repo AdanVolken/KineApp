@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KineApp.Views.PaginaPrincipal">
+             x:Class="KineApp.Views.PaginaPrincipal"
+             NavigationPage.HasNavigationBar="False">
     <Grid BackgroundColor="White">
         <!-- Barra superior -->
         <Grid.RowDefinitions>
@@ -20,13 +21,13 @@
             <StackLayout>
                 <Image Source="Imagen/cuerpo_humano.png" Aspect="AspectFit" Margin="10"/>
 
-                <Button Text="1 - Cabeza y cuello" CommandParameter="6" Clicked="ParteButton_Clicked" />
-                <Button Text="2 - Tronco" CommandParameter="2" Clicked="ParteButton_Clicked" />
-                <Button Text="3 - Espalda alta, hombro y brazo" CommandParameter="1" Clicked="ParteButton_Clicked" />
-                <Button Text="4 - Antebrazo y mano" CommandParameter="7" Clicked="ParteButton_Clicked" />
-                <Button Text="5 - Tronco inferior" CommandParameter="3" Clicked="ParteButton_Clicked" />
-                <Button Text="6 - Cadera, muslo y rodilla" CommandParameter="5" Clicked="ParteButton_Clicked" />
-                <Button Text="7 - Pierna, Tobillo y Pie" CommandParameter="4" Clicked="ParteButton_Clicked" />
+                <Button Text="1 - Cabeza y cuello" CommandParameter="6" Clicked="ParteButton_Clicked" Margin="10"/>
+                <Button Text="2 - Tronco" CommandParameter="2" Clicked="ParteButton_Clicked" Margin="10"/>
+                <Button Text="3 - Espalda alta, hombro y brazo" CommandParameter="1" Clicked="ParteButton_Clicked" Margin="10"/>
+                <Button Text="4 - Antebrazo y mano" CommandParameter="7" Clicked="ParteButton_Clicked" Margin="10"/>
+                <Button Text="5 - Tronco inferior" CommandParameter="3" Clicked="ParteButton_Clicked" Margin="10"/>
+                <Button Text="6 - Cadera, muslo y rodilla" CommandParameter="5" Clicked="ParteButton_Clicked" Margin="10"/>
+                <Button Text="7 - Pierna, Tobillo y Pie" CommandParameter="4" Clicked="ParteButton_Clicked" Margin="10"/>
             </StackLayout>
         </ScrollView>
 

@@ -5,6 +5,7 @@
              Title="Parte Detalle">
     <ScrollView>
         <StackLayout Padding="10">
+            <Image x:Name="ParteImage"  Aspect="AspectFit" Margin="0,0,0,10"/>
             <Label Text="Músculos y Síntomas"
                    FontSize="24"
                    HorizontalOptions="Center" />
@@ -13,7 +14,7 @@
                    FontSize="20"
                    FontAttributes="Bold"
                    Margin="0,10,0,0" />
-            <CollectionView x:Name="MusculosCollectionView" HeightRequest="200">
+            <CollectionView x:Name="MusculosCollectionView" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10" Orientation="Vertical">
