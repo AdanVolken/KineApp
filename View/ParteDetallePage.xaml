@@ -35,7 +35,7 @@
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
                    Margin="0,20,0,0" />
-            <CollectionView x:Name="SintomasCollectionView" HeightRequest="200">
+            <CollectionView x:Name="SintomasCollectionView" HeightRequest="200" SelectionChanged="SintomasCollectionView_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10" Orientation="Vertical">

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using KineApp.View;
+
 
 namespace KineApp.Views
 {
@@ -25,6 +27,7 @@ namespace KineApp.Views
             base.OnAppearing();
             LoadData();
         }
+
 
         private void LoadData()
         {
@@ -54,10 +57,26 @@ namespace KineApp.Views
                                                .Where(s => sintomasPartes.Contains(s.IdSintoma))
                                                .ToList();
                 SintomasCollectionView.ItemsSource = sintomas;
+
+                // Manipular el evento SelectionChanged del SintomasCollectionView
+                SintomasCollectionView.SelectionChanged += SintomasCollectionView_SelectionChanged;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error cargando datos: {ex.Message}");
+            }
+        }
+
+        private void SintomasCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Verificar si se ha seleccionado un síntoma
+            if (e.CurrentSelection.FirstOrDefault() is SintomaModel selectedSintoma)
+            {
+                // Navegar a la página SintomaIdPage y pasar el ID del síntoma seleccionado como parámetro
+                Navigation.PushAsync(new SintomaIdPage(selectedSintoma.IdSintoma));
+
+                // Restablecer la selección para evitar que el evento se dispare varias veces
+                SintomasCollectionView.SelectedItem = null;
             }
         }
 
