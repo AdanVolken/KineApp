@@ -36,7 +36,7 @@ namespace KineApp.Views
                                             .FirstOrDefault(p => p.IdParte == _parteId);
                 if (parte != null && parte.ImgParte != null)
                 {
-                    Console.WriteLine($"Imagen de parte: {parte.ImgParte.Length} bytes");
+
                     ParteImage.Source = ImageSource.FromStream(() => new MemoryStream(parte.ImgParte));
                 }
 

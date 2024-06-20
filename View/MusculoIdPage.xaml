@@ -7,7 +7,7 @@
         <StackLayout Padding="10">
             <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
                 <Image.GestureRecognizers>
-                    <TapGestureRecognizer  />
+                    <TapGestureRecognizer  Tapped="OnImageTapped" />
                 </Image.GestureRecognizers>
             </Image>
             <Label Text="Parte y Síntomas"
@@ -30,7 +30,7 @@
                             <Button Text="+"
                                 TextColor="White"
                                 VerticalOptions="Center"
-                                Grid.Column="1" />
+                                Grid.Column="1" Clicked="Button_Clicked_Parte"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -52,7 +52,7 @@
                             <Button Text="+"
                                 TextColor="White"
                                 VerticalOptions="Center"
-                                Grid.Column="1"  />
+                                Grid.Column="1"  Clicked="Button_Clicked_Sintomas"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

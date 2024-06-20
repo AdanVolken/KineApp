@@ -50,7 +50,7 @@ namespace KineApp.Views
         {
             if (sender is Button button && button.BindingContext is MusculoModel selectedMusculo)
             {
-                Console.WriteLine($"Selected Musculo: {selectedMusculo.Nombre}");
+
                 await Navigation.PushAsync(new MusculoIdPage(selectedMusculo.IdMusculo));
             }
 

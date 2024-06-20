@@ -25,6 +25,15 @@ namespace KineApp.Views
 
         private void LoadData()
         {
+            // Cargar imagen de la parte
+            var punto = _databaseService.GetItems<MusculoModel>()
+                                        .FirstOrDefault(p => p.IdMusculo == _musculoId);
+            if (punto != null && punto.Punto != null)
+            {
+                ParteImage.Source = ImageSource.FromStream(() => new MemoryStream(punto.Punto));
+            }
+
+
             // Saco las aprtes del musculo seleccinado
             var musculoParte =  _databaseService.GetItems<MusculoModel>().Where(m => m.IdMusculo == _musculoId).Select(m => m.IdParte).ToList();
             var parte = _databaseService.GetItems<ParteModel>().Where(p => musculoParte.Contains(p.IdParte)).ToList();
@@ -37,6 +46,31 @@ namespace KineApp.Views
 
 
 
+        }
+
+        // Lo que hace es agrandar la imagen en pantalla completa  
+        private void OnImageTapped(object sender, EventArgs e)
+        {
+            if (ParteImage.Source != null)
+            {
+                Navigation.PushAsync(new FullScreenImagePage(ParteImage.Source));
+            }
+        }
+
+        private async void Button_Clicked_Parte(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is ParteModel selectedParte)
+            {
+                await Navigation.PushAsync(new ParteDetallePage(selectedParte.IdParte));
+            }
+        }
+
+        private async void Button_Clicked_Sintomas(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is SintomaModel selectedParte)
+            {
+                await Navigation.PushAsync(new SintomaIdPage(selectedParte.IdSintoma));
+            }
         }
     }
 }
