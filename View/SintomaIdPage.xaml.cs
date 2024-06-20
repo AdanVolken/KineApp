@@ -37,8 +37,22 @@ namespace KineApp.Views
 
         }
 
-        private void Button_Clicked_Parte(object sender, EventArgs e)
+        private async void Button_Clicked_Parte(object sender, EventArgs e)
         {
+            if (sender is Button button && button.BindingContext is ParteModel selectedParte)
+            {
+                await Navigation.PushAsync(new ParteDetallePage(selectedParte.IdParte));
+            }
+
+        }
+
+        private async void Button_Clicked_Musculo(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is MusculoModel selectedMusculo)
+            {
+                Console.WriteLine($"Selected Musculo: {selectedMusculo.Nombre}");
+                await Navigation.PushAsync(new MusculoIdPage(selectedMusculo.IdMusculo));
+            }
 
         }
     }

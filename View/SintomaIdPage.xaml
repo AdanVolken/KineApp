@@ -5,13 +5,9 @@
              Title="Detalle del Síntoma">
     <ScrollView>
         <StackLayout Padding="10">
-            <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer  />
-                </Image.GestureRecognizers>
-            </Image>
             <Label Text="Parte y Síntomas"
                    FontSize="24"
+                   TextColor="#6b47e9"
                    HorizontalOptions="Center" />
 
             <Label Text="Partes"
@@ -52,7 +48,7 @@
                             <Button Text="+"
                                 TextColor="White"
                                 VerticalOptions="Center"
-                                Grid.Column="1"  />
+                                Grid.Column="1"  Clicked="Button_Clicked_Musculo"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
