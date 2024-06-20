@@ -44,5 +44,14 @@ namespace KineApp.Views
                 Console.WriteLine($"Error cargando datos: {ex.Message}");
             }
         }
+
+        private async void Button_Clicked_Sintoma(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is SintomaModel selectedParte)
+            {
+                await Navigation.PushAsync(new SintomaIdPage(selectedParte.IdSintoma));
+            }
+
+        }
     }
 }

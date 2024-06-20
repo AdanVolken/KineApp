@@ -15,10 +15,16 @@
                             VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" Orientation="Vertical">
+                    <Grid Padding="10" ColumnDefinitions="*,Auto">
                         <Label Text="{Binding Nombre}"
-                                   FontSize="20" />
-                    </StackLayout>
+                               FontSize="20"
+                               VerticalOptions="Center"
+                               Grid.Column="0" />
+                        <Button Text="+"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                Grid.Column="1"  Clicked="Button_Clicked_Sintoma"/>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
