@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KineApp.View.MusculoIdPage"
-             Title="MusculoIdPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="KineApp.Views.MusculoIdPage"
+             Title="Detalle del Músculo">
+    <StackLayout Padding="10">
+        <Label Text="Detalle del Músculo"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <Label Text="Nombre"
+               FontSize="20"
+               FontAttributes="Bold" />
+        <Label x:Name="NombreLabel"
+               FontSize="20" />
+
+        <Label Text="Descripción"
+               FontSize="20"
+               FontAttributes="Bold"
+               Margin="0,10,0,0" />
+        <Label x:Name="DescripcionLabel"
+               FontSize="20" />
+    </StackLayout>
 </ContentPage>

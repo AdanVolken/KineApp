@@ -5,8 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using KineApp.View;
-
+using KineApp.Views;
 
 namespace KineApp.Views
 {
@@ -28,7 +27,6 @@ namespace KineApp.Views
             LoadData();
         }
 
-
         private void LoadData()
         {
             try
@@ -48,18 +46,18 @@ namespace KineApp.Views
                                                .ToList();
                 MusculosCollectionView.ItemsSource = musculos;
 
-                // Obtener síntomas relacionados con la parte
                 var sintomasPartes = _databaseService.GetItems<SintomaParte>()
                                                      .Where(sp => sp.IdParte == _parteId)
                                                      .Select(sp => sp.IdSintoma)
                                                      .ToList();
                 var sintomas = _databaseService.GetItems<SintomaModel>()
-                                               .Where(s => sintomasPartes.Contains(s.IdSintoma))
-                                               .ToList();
+                                              .Where(s => sintomasPartes.Contains(s.IdSintoma))
+                                              .ToList();
                 SintomasCollectionView.ItemsSource = sintomas;
 
-                // Manipular el evento SelectionChanged del SintomasCollectionView
+                // Agregar eventos SelectionChanged
                 SintomasCollectionView.SelectionChanged += SintomasCollectionView_SelectionChanged;
+                MusculosCollectionView.SelectionChanged += MusculosCollectionView_SelectionChanged;
             }
             catch (Exception ex)
             {
@@ -69,14 +67,19 @@ namespace KineApp.Views
 
         private void SintomasCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Verificar si se ha seleccionado un síntoma
             if (e.CurrentSelection.FirstOrDefault() is SintomaModel selectedSintoma)
             {
-                // Navegar a la página SintomaIdPage y pasar el ID del síntoma seleccionado como parámetro
                 Navigation.PushAsync(new SintomaIdPage(selectedSintoma.IdSintoma));
+                Console.WriteLine("Seleccionaste un síntoma.");
+            }
+        }
 
-                // Restablecer la selección para evitar que el evento se dispare varias veces
-                SintomasCollectionView.SelectedItem = null;
+        private void MusculosCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is MusculoModel selectedMusculo)
+            {
+                Navigation.PushAsync(new MusculoIdPage(selectedMusculo.IdMusculo));
+                Console.WriteLine("Seleccionaste un músculo.");
             }
         }
 

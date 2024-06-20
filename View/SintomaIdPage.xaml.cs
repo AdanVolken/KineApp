@@ -1,44 +1,44 @@
-using KineApp.DataAcces;
+using Microsoft.Maui.Controls;
 using KineApp.Model;
+using KineApp.DataAcces;
+using System;
 
-
-namespace KineApp.Views;											
-
-public partial class SintomaIdPage : ContentPage
+namespace KineApp.Views
 {
-	private KineDBconexion _dbConexion;
-	private int _id;
-	public SintomaIdPage(int idSintoma)
-	{
-		InitializeComponent();
-		_dbConexion = new KineDBconexion();
-		_id = idSintoma;
-		MostarSintomas();
-	}
+    public partial class SintomaIdPage : ContentPage
+    {
+        private KineDBconexion _databaseService;
+        private int _sintomaId;
 
-	public void MostarSintomas()
-	{
-        var sintoma = _dbConexion.GetItems<SintomaModel>()
-                              .FirstOrDefault(s => s.IdSintoma == _id);
-        if (sintoma != null)
+        public SintomaIdPage(int sintomaId)
         {
-            SintomaNombre.Title = sintoma.Nombre;
+            InitializeComponent();
+            _databaseService = new KineDBconexion();
+            _sintomaId = sintomaId;
         }
 
-        //Buscar la lista de musculos relacionados con el sintoma
-        var musculosSintoma = _dbConexion.GetItems<MusculoSintomaModel>().Where(ms => ms.IdSintoma == _id).Select(ms => ms.IdMusculo).ToList();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadData();
+        }
 
-		//Buscamos en la tabla musculos 
-		var musculo = _dbConexion.GetItems<MusculoModel>().Where(m => musculosSintoma.Contains(m.IdMusculo)).ToList();
-
-        // Cargamos a la lista 
-        MusculosCollectionView.ItemsSource = musculo;
-
-		var sintomaParte = _dbConexion.GetItems<SintomaParte>().Where(sp => sp.IdSintoma == _id).Select(sp => sp.IdParte).ToList();
-
-		var parte = _dbConexion.GetItems<ParteModel>().Where(p => sintomaParte.Contains(p.IdParte)).ToList();
-
-        SintomasCollectionView.ItemsSource = parte;
-
-    }																						 
+        private void LoadData()
+        {
+            try
+            {
+                var sintoma = _databaseService.GetItems<SintomaModel>()
+                                              .FirstOrDefault(s => s.IdSintoma == _sintomaId);
+                if (sintoma != null)
+                {
+                    NombreLabel.Text = sintoma.Nombre;
+                    DescripcionLabel.Text = sintoma.Descri;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error cargando datos: {ex.Message}");
+            }
+        }
+    }
 }

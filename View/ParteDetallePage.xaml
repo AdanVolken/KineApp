@@ -19,7 +19,7 @@
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
                    Margin="0,10,0,0" />
-            <CollectionView x:Name="MusculosCollectionView" >
+            <CollectionView x:Name="MusculosCollectionView" HeightRequest="300" SelectionChanged="MusculosCollectionView_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10" Orientation="Vertical">

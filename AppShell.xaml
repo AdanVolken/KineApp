@@ -3,13 +3,10 @@
     x:Class="KineApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:KineApp"
+    xmlns:views="clr-namespace:KineApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="KineApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <ShellContent Route="SintomaIdPage" ContentTemplate="{DataTemplate views:SintomaIdPage}" />
+    <ShellContent Route="MusculoIdPage" ContentTemplate="{DataTemplate views:MusculoIdPage}" />
 </Shell>
