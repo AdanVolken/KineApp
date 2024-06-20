@@ -13,11 +13,16 @@
                         VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" Orientation="Vertical">
+                    <Grid Padding="10" ColumnDefinitions="*,Auto">
                         <Label Text="{Binding Nombre}"
-                               FontSize="20" />
-                        <!-- Aquí puedes agregar más detalles si lo deseas -->
-                    </StackLayout>
+                               FontSize="20"
+                               VerticalOptions="Center"
+                               Grid.Column="0" />
+                        <Button Text="+"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                Grid.Column="1"  Clicked="Button_Clicked_Musculo"/>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

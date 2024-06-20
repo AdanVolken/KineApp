@@ -37,5 +37,14 @@ namespace KineApp.Views
                 Console.WriteLine($"Error cargando datos: {ex.Message}");
             }
         }
+
+        private async void Button_Clicked_Musculo(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is MusculoModel selectedMusculo)
+            {
+
+                await Navigation.PushAsync(new MusculoIdPage(selectedMusculo.IdMusculo));
+            }
+        }
     }
 }
