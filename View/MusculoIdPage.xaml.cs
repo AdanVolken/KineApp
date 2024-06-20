@@ -25,19 +25,18 @@ namespace KineApp.Views
 
         private void LoadData()
         {
-            try
-            {
-                var musculo = _databaseService.GetItems<MusculoModel>()
-                                              .FirstOrDefault(m => m.IdMusculo == _musculoId);
-                if (musculo != null)
-                {
-                    NombreLabel.Text = musculo.Nombre;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error cargando datos: {ex.Message}");
-            }
+            // Saco las aprtes del musculo seleccinado
+            var musculoParte =  _databaseService.GetItems<MusculoModel>().Where(m => m.IdMusculo == _musculoId).Select(m => m.IdParte).ToList();
+            var parte = _databaseService.GetItems<ParteModel>().Where(p => musculoParte.Contains(p.IdParte)).ToList();
+            MusculosCollectionView.ItemsSource = parte;
+
+            //Sacar Sintomas relacionados a ese musculo
+            var musculoSintoma = _databaseService.GetItems<MusculoSintomaModel>().Where(ms => ms.IdMusculo == _musculoId).Select(ms => ms.IdSintoma).ToList();  
+            var sintoma = _databaseService.GetItems<SintomaModel>().Where(s => musculoSintoma.Contains(s.IdSintoma)).ToList();
+            SintomasCollectionView.ItemsSource = sintoma;
+
+
+
         }
     }
 }

@@ -3,22 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.MusculoIdPage"
              Title="Detalle del Músculo">
-    <StackLayout Padding="10">
-        <Label Text="Detalle del Músculo"
-               FontSize="24"
-               HorizontalOptions="Center" />
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer  />
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Parte y Síntomas"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
 
-        <Label Text="Nombre"
-               FontSize="20"
-               FontAttributes="Bold" />
-        <Label x:Name="NombreLabel"
-               FontSize="20" />
+            <Label Text="Partes"
+                   FontSize="25"
+                   TextColor="#6b47e9"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0" />
+            <CollectionView x:Name="MusculosCollectionView" HeightRequest="300" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="*,Auto">
+                            <Label Text="{Binding Nombre}"
+                               FontSize="20"
+                               VerticalOptions="Center"
+                               Grid.Column="0" />
+                            <Button Text="+"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                Grid.Column="1" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Label Text="Descripción"
-               FontSize="20"
-               FontAttributes="Bold"
-               Margin="0,10,0,0" />
-        <Label x:Name="DescripcionLabel"
-               FontSize="20" />
-    </StackLayout>
+            <Label Text="Síntomas"
+                   FontSize="25"
+                   TextColor="#6b47e9"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,0" />
+            <CollectionView x:Name="SintomasCollectionView" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="*,Auto">
+                            <Label Text="{Binding Nombre}"
+                               FontSize="20"
+                               VerticalOptions="Center"
+                               Grid.Column="0" />
+                            <Button Text="+"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                Grid.Column="1"  />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

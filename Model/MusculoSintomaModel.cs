@@ -2,7 +2,7 @@
 
 namespace KineApp.Model
 {
-    [SQLite.Table("MusculoSitnoma")]
+    [SQLite.Table("MusculoSintoma")]
     class MusculoSintomaModel
     {
         [PrimaryKey,AutoIncrement]

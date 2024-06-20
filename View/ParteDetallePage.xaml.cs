@@ -46,6 +46,7 @@ namespace KineApp.Views
                                                .ToList();
                 MusculosCollectionView.ItemsSource = musculos;
 
+                // Obtener Partes relacionadas con los sintomas
                 var sintomasPartes = _databaseService.GetItems<SintomaParte>()
                                                      .Where(sp => sp.IdParte == _parteId)
                                                      .Select(sp => sp.IdSintoma)
@@ -55,31 +56,10 @@ namespace KineApp.Views
                                               .ToList();
                 SintomasCollectionView.ItemsSource = sintomas;
 
-                // Agregar eventos SelectionChanged
-                SintomasCollectionView.SelectionChanged += SintomasCollectionView_SelectionChanged;
-                MusculosCollectionView.SelectionChanged += MusculosCollectionView_SelectionChanged;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error cargando datos: {ex.Message}");
-            }
-        }
-
-        private void SintomasCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.CurrentSelection.FirstOrDefault() is SintomaModel selectedSintoma)
-            {
-                Navigation.PushAsync(new SintomaIdPage(selectedSintoma.IdSintoma));
-                Console.WriteLine("Seleccionaste un síntoma.");
-            }
-        }
-
-        private void MusculosCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.CurrentSelection.FirstOrDefault() is MusculoModel selectedMusculo)
-            {
-                Navigation.PushAsync(new MusculoIdPage(selectedMusculo.IdMusculo));
-                Console.WriteLine("Seleccionaste un músculo.");
             }
         }
 
@@ -89,6 +69,24 @@ namespace KineApp.Views
             if (ParteImage.Source != null)
             {
                 Navigation.PushAsync(new FullScreenImagePage(ParteImage.Source));
+            }
+        }
+
+        private async void Button_Clicked_Musculo(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is MusculoModel selectedMusculo)
+            {
+                Console.WriteLine($"Selected Musculo: {selectedMusculo.Nombre}");
+                await Navigation.PushAsync(new MusculoIdPage(selectedMusculo.IdMusculo));
+            }
+        }
+
+        private async void Button_Clicked_Sintoma(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is SintomaModel selectedSintoma)
+            {
+                Console.WriteLine($"Selected Sintoma: {selectedSintoma.Nombre}");
+                await Navigation.PushAsync(new SintomaIdPage(selectedSintoma.IdSintoma));
             }
         }
     }
