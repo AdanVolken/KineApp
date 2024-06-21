@@ -50,5 +50,9 @@ namespace KineApp.DataAcces
             _database.Insert(item);
 
         }
+        public void UpdateItem<T>(T item)
+        {
+            _database.Update(item);
+        }
     }
 }
