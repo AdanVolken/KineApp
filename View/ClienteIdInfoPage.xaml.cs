@@ -24,9 +24,11 @@ namespace KineApp.Views
             try
             {
                 var cliente = _databaseService.GetItems<ClienteModel>().FirstOrDefault(c => c.IdCliente == _clienteId);
+                var musculo = _databaseService.GetItems<MusculoModel>().FirstOrDefault(m => m.IdMusculo == cliente.IdMusculo);
 
                 if (cliente != null)
                 {
+                    Title = $"{cliente.Nombre} {cliente.Apellido}";
                     NombreLabel.Text = $"Nombre: {cliente.Nombre}";
                     ApellidoLabel.Text = $"Apellido: {cliente.Apellido}";
                     DniLabel.Text = $"DNI: {cliente.Dni}";
@@ -36,6 +38,7 @@ namespace KineApp.Views
                     SesionesLabel.Text = $"Sesiones: {cliente.Sesiones}";
                     DolorLabel.Text = $"Dolor: {cliente.Dolor}";
                     EstampilladoLabel.Text = $"Estampillado: {(cliente.Estampillado ? "Sí" : "No")}";
+                    MusculoLabel.Text = $"Músculo: {musculo?.Nombre ?? "No especificado"}";
                 }
                 else
                 {

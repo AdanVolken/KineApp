@@ -58,6 +58,14 @@ namespace KineApp.Views
             {
                 if (_clienteEditando == null)
                 {
+                    // Check if there is an existing client with the same DNI
+                    var existingClient = _clientes.FirstOrDefault(c => c.Dni == DniEntry.Text);
+                    if (existingClient != null)
+                    {
+                        await DisplayAlert("Error", "Ya existe un cliente con el mismo DNI.", "OK");
+                        return;
+                    }
+
                     var nuevoCliente = new ClienteModel
                     {
                         Nombre = NombreEntry.Text,
@@ -79,6 +87,14 @@ namespace KineApp.Views
                 }
                 else
                 {
+                    // Check if there is an existing client with the same DNI but different ID
+                    var existingClient = _clientes.FirstOrDefault(c => c.Dni == DniEntry.Text && c.IdCliente != _clienteEditando.IdCliente);
+                    if (existingClient != null)
+                    {
+                        await DisplayAlert("Error", "Ya existe otro cliente con el mismo DNI.", "OK");
+                        return;
+                    }
+
                     _clienteEditando.Nombre = NombreEntry.Text;
                     _clienteEditando.Apellido = ApellidoEntry.Text;
                     _clienteEditando.Dni = DniEntry.Text;

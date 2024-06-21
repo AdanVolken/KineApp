@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.ClienteIdInfoPage"
-             Title="Información del Cliente">
+             Title="Cliente Info">
     <ScrollView>
         <StackLayout Padding="10">
             <Label x:Name="NombreLabel" FontSize="20" />
@@ -14,6 +14,7 @@
             <Label x:Name="SesionesLabel" FontSize="20" />
             <Label x:Name="DolorLabel" FontSize="20" />
             <Label x:Name="EstampilladoLabel" FontSize="20" />
+            <Label x:Name="MusculoLabel" FontSize="20" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
