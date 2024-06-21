@@ -8,7 +8,7 @@
              Title="Gestión de Turnos" Padding="15" >
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20" >
+            <StackLayout >
                 <!-- Formulario para agregar turnos -->
                 <Frame CornerRadius="10" Padding="20" Margin="0,0,0,10">
                     <StackLayout Spacing="10">

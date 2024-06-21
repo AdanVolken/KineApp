@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.ClientePage"
-             Title="Clientes" Padding="15" >
+             Title="Clientes" Padding="10">
     <ScrollView>
-        <StackLayout Padding="20" >
-            <StackLayout Orientation="Vertical" Padding="10">
+        <StackLayout  >
+            <StackLayout Orientation="Vertical" >
                 <!-- Formulario de cliente -->
                 <Entry x:Name="NombreEntry" Placeholder="Nombre" />
                 <Entry x:Name="ApellidoEntry" Placeholder="Apellido" />

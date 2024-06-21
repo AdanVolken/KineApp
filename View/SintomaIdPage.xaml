@@ -2,37 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.SintomaIdPage"
-             Title="Detalle del Síntoma" Padding="15">
+             Title="Detalle del Síntoma"
+             Padding="15">
     <ScrollView>
-        <StackLayout Padding="10" >
-            <Label Text="Parte y Síntomas"
+        <StackLayout >
+            <Label x:Name="SintomaNombreLabel"
                    FontSize="24"
                    TextColor="#6b47e9"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,10" />
 
             <Label Text="Partes"
                    FontSize="25"
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
                    Margin="0,10,0,10" />
-            <CollectionView x:Name="MusculosCollectionView" HeightRequest="300" >
+            <CollectionView x:Name="MusculosCollectionView" HeightRequest="300">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10" ColumnDefinitions="*,Auto">
                             <Label Text="{Binding Nombre}"
-                               FontSize="20"
-                               VerticalOptions="Center"
-                               Grid.Column="0" />
+                                   FontSize="20"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0" />
                             <Button Text="+"
-                                TextColor="White"
-                                VerticalOptions="Center"
-                                Grid.Column="1" Clicked="Button_Clicked_Parte"/>
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="Button_Clicked_Parte" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Label Text="Musculos"
+            <Label Text="Músculos"
                    FontSize="25"
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
@@ -42,13 +45,14 @@
                     <DataTemplate>
                         <Grid Padding="10" ColumnDefinitions="*,Auto">
                             <Label Text="{Binding Nombre}"
-                               FontSize="20"
-                               VerticalOptions="Center"
-                               Grid.Column="0" />
+                                   FontSize="20"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0" />
                             <Button Text="+"
-                                TextColor="White"
-                                VerticalOptions="Center"
-                                Grid.Column="1"  Clicked="Button_Clicked_Musculo"/>
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="Button_Clicked_Musculo" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

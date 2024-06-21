@@ -4,7 +4,7 @@
              x:Class="KineApp.Views.MusculoIdPage"
              Title="Detalle del Músculo" Padding="15"  >
     <ScrollView>
-        <StackLayout Padding="10" >
+        <StackLayout >
             <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer  Tapped="OnImageTapped" />

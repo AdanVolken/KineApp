@@ -4,7 +4,7 @@
              Title="Musculos " Padding="10" 
              >
 
-    <StackLayout Padding="10" >
+    <StackLayout  >
         <Label Text="Lista de Músculos"
                FontSize="24"
                HorizontalOptions="Center" />
