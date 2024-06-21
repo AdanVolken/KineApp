@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KineApp.Views.ClienteIdInfoPage"
+             Title="Información del Cliente">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label x:Name="NombreLabel" FontSize="20" />
+            <Label x:Name="ApellidoLabel" FontSize="20" />
+            <Label x:Name="DniLabel" FontSize="20" />
+            <Label x:Name="TelefonoLabel" FontSize="20" />
+            <Label x:Name="CorreoLabel" FontSize="20" />
+            <Label x:Name="ObraSocialLabel" FontSize="20" />
+            <Label x:Name="SesionesLabel" FontSize="20" />
+            <Label x:Name="DolorLabel" FontSize="20" />
+            <Label x:Name="EstampilladoLabel" FontSize="20" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

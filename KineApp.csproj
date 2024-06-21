@@ -58,6 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Update="View\ClienteIdInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\ClientePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
