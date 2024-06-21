@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KineApp.Views.ClientePage"
+             Title="Clientes">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <StackLayout Orientation="Vertical" Padding="10">
+                <!-- Formulario de cliente -->
+                <Entry x:Name="NombreEntry" Placeholder="Nombre" />
+                <Entry x:Name="ApellidoEntry" Placeholder="Apellido" />
+                <Entry x:Name="DniEntry" Placeholder="DNI" />
+                <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" />
+                <Entry x:Name="CorreoEntry" Placeholder="Correo" />
+                <Entry x:Name="ObraSocialEntry" Placeholder="Obra Social" />
+                <Entry x:Name="SesionesEntry" Placeholder="Sesiones" Keyboard="Numeric" />
+                <Editor x:Name="DolorEditor" Placeholder="Dolor" />
+                <Picker x:Name="MusculoPicker" Title="Selecciona un Músculo" />
+                <Picker x:Name="EstampilladoPicker" Title="Estampillado">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Sí</x:String>
+                            <x:String>No</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Button Text="Guardar" Clicked="OnAgregarClienteClicked" />
+            </StackLayout>
+
+            <!-- Buscador -->
+            <SearchBar x:Name="ClienteSearchBar" Placeholder="Buscar clientes" TextChanged="OnClienteSearchBarTextChanged" />
+
+            <!-- Lista de clientes -->
+            <CollectionView x:Name="ClientesCollectionView" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="*,*">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Nombre}" FontSize="20" Grid.Column="0" Grid.Row="0" />
+                            <Label Text="{Binding Apellido}" FontSize="20" Grid.Column="1" Grid.Row="0" />
+                            <Label Text="{Binding ObraSocial}" FontSize="16" Grid.Column="0" Grid.Row="1" />
+                            <Label Text="{Binding Sesiones}" FontSize="16" Grid.Column="1" Grid.Row="1" />
+                            <Button Text="Editar" Grid.Column="0" Grid.Row="2" Clicked="OnEditarClienteClicked" CommandParameter="{Binding .}" />
+                            <Button Text="Info" Grid.Column="1" Grid.Row="2" Clicked="OnInfoClienteClicked" CommandParameter="{Binding .}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

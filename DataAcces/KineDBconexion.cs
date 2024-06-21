@@ -39,5 +39,16 @@ namespace KineApp.DataAcces
         {
             return _database.Table<T>().ToList();
         }
+
+        public void InsertItem<T>(T item)
+        {
+            // Implementación para insertar el item en la base de datos
+            // Esto puede variar dependiendo de cómo estés manejando la base de datos.
+            // Aquí un ejemplo simple:
+
+
+            _database.Insert(item);
+
+        }
     }
 }

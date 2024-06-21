@@ -27,5 +27,10 @@ namespace KineApp.Views
             int parteId = int.Parse(button.CommandParameter.ToString());
             await Navigation.PushAsync(new ParteDetallePage(parteId));
         }
+
+        private async void btnCliente_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ClientePage());
+        }
     }
 }

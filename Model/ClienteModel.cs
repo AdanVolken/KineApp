@@ -18,7 +18,7 @@ namespace KineApp.Model
         public int Sesiones {  get; set; }
         public string Dolor { get; set; }
         public int IdMusculo { get; set; }
-        public  int Estampillado { get; set; }
+        public  bool Estampillado { get; set; }
 
     }
 }
