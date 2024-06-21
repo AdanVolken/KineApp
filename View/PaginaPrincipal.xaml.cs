@@ -32,5 +32,10 @@ namespace KineApp.Views
         {
             await Navigation.PushAsync(new ClientePage());
         }
+
+        private async void btnTurno_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new TurnosPage());
+        }
     }
 }

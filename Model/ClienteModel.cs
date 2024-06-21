@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace KineApp.Model
 {
     [SQLite.Table("Cliente")]
-    class ClienteModel
+    public class ClienteModel
     {
         [PrimaryKey, AutoIncrement]
         public int IdCliente   { get; set; }    
@@ -19,6 +19,9 @@ namespace KineApp.Model
         public string Dolor { get; set; }
         public int IdMusculo { get; set; }
         public  bool Estampillado { get; set; }
+
+        [Ignore]
+        public string NombreCompleto => $"{Nombre} {Apellido}";
 
     }
 }
