@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.MusculoIdPage"
-             Title="Detalle del Músculo">
+             Title="Detalle del Músculo" Padding="15"  >
     <ScrollView>
-        <StackLayout Padding="10" BackgroundColor="White">
+        <StackLayout Padding="10" >
             <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer  Tapped="OnImageTapped" />
@@ -12,13 +12,13 @@
             </Image>
 
             <Label x:Name="MusculoNombreLabel" FontSize="24" HorizontalOptions="Center" Margin="0,10,0,0" />
-            <Label Text="Las X representan los puntos de activación. No hay diferencias entre las X blancas y negras. La área roja es el dolor causado por el punto de activación y el rojo más oscuro significa que más personas experimentan dolor en esa área." FontSize="24" HorizontalOptions="Center" Margin="0,10,0,0"/>
+            <Label Text="Las X representan los puntos de activación. No hay diferencias entre las X blancas y negras. La área roja es el dolor causado por el punto de activación y el rojo más oscuro significa que más personas experimentan dolor en esa área." FontSize="15" HorizontalOptions="Center" Margin="0,10,0,0"/>
 
             <Label Text="Partes"
                    FontSize="25"
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
-                   Margin="0,10,0,0" />
+                   Margin="0,10,0,10" />
             <CollectionView x:Name="MusculosCollectionView" HeightRequest="300">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -41,7 +41,7 @@
                    FontSize="25"
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
-                   Margin="0,20,0,0" />
+                   Margin="0,20,0,10" />
             <CollectionView x:Name="SintomasCollectionView" HeightRequest="300">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

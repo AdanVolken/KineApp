@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.ClienteIdInfoPage"
-             Title="Cliente Info">
+             Title="Cliente Info" Padding="15"  >
     <ScrollView>
-        <StackLayout Padding="10">
+        <StackLayout Padding="10" >
             <Label x:Name="NombreLabel" FontSize="20" />
             <Label x:Name="ApellidoLabel" FontSize="20" />
             <Label x:Name="DniLabel" FontSize="20" />

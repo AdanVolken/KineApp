@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KineApp.Views.ParteDetallePage"
-             Title="Parte Detalle">
+             Title="Partes Cuerpo" Padding="15" >
     <ScrollView>
-        <StackLayout Padding="10">
+        <StackLayout Padding="10" >
             <Image x:Name="ParteImage" HeightRequest="300" Aspect="AspectFit" Margin="0,0,0,10">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnImageTapped" />
@@ -18,7 +18,7 @@
                    FontSize="25"
                    TextColor="#6b47e9"
                    FontAttributes="Bold"
-                   Margin="0,10,0,0" />
+                   Margin="0,10,0,10" />
             <CollectionView x:Name="MusculosCollectionView" HeightRequest="300" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
