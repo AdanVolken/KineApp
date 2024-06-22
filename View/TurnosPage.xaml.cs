@@ -4,7 +4,6 @@ using KineApp.DataAcces;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.Maui.Storage;
 
 namespace KineApp.Views
 {
@@ -13,54 +12,33 @@ namespace KineApp.Views
         private KineDBconexion _databaseService;
         private SesionModel _turnoEditando;
         public ObservableCollection<SesionModel> Turnos { get; set; }
+        public ObservableCollection<SesionModel> CompletedTurnos { get; set; }
         public ObservableCollection<ClienteModel> Clientes { get; set; }
-        private int CompletedSessions { get; set; }
-        public ObservableCollection<SesionModel> CompletedSessionsList { get; set; }
 
         public TurnosPage()
         {
             InitializeComponent();
             _databaseService = new KineDBconexion();
             LoadData();
-            LoadCompletedSessions();
-            LoadCompletedSessionsList();
             BindingContext = this;
         }
 
         private void LoadData()
         {
             Clientes = new ObservableCollection<ClienteModel>(_databaseService.GetItems<ClienteModel>());
-            var turnosList = _databaseService.GetItems<SesionModel>()
-                .Where(t => !t.Completado) // Excluir sesiones completadas
-                .OrderBy(t => t.Fecha)
-                .ToList();
+            var turnosList = _databaseService.GetItems<SesionModel>().OrderBy(t => t.Fecha).ToList();
 
-            // Asignar los nombres de los clientes a los turnos
             foreach (var turno in turnosList)
             {
                 turno.Cliente = Clientes.FirstOrDefault(c => c.IdCliente == turno.IdCliente);
             }
 
-            Turnos = new ObservableCollection<SesionModel>(turnosList);
-        }
+            Turnos = new ObservableCollection<SesionModel>(turnosList.Where(t => !t.Completado));
+            CompletedTurnos = new ObservableCollection<SesionModel>(turnosList.Where(t => t.Completado && t.Fecha.Month == DateTime.Now.Month && t.Fecha.Year == DateTime.Now.Year));
 
-        private void LoadCompletedSessions()
-        {
-            var currentMonthKey = DateTime.Now.ToString("yyyy-MM");
-            CompletedSessions = Preferences.Get(currentMonthKey, 0);
-        }
-
-        private void LoadCompletedSessionsList()
-        {
-            var firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-
-            CompletedSessionsList = new ObservableCollection<SesionModel>(
-                _databaseService.GetItems<SesionModel>()
-                    .Where(t => t.Completado && t.Fecha >= firstDayOfMonth && t.Fecha <= lastDayOfMonth)
-                    .OrderBy(t => t.Fecha)
-                    .ToList()
-            );
+            TurnosCollectionView.ItemsSource = Turnos;
+            CompletedSessionsCollectionView.ItemsSource = CompletedTurnos;
+            UpdateCompletedSessionsCount();
         }
 
         private void GuardarTurno_Clicked(object sender, EventArgs e)
@@ -112,24 +90,25 @@ namespace KineApp.Views
                 turno.Completado = true;
                 _databaseService.UpdateItem(turno);
 
-                // Remover el turno de la lista visible
                 Turnos.Remove(turno);
+                CompletedTurnos.Add(turno);
+                CompletedSessionsCollectionView.ItemsSource = CompletedTurnos.OrderBy(t => t.Fecha).ToList();
+                TurnosCollectionView.ItemsSource = Turnos.OrderBy(t => t.Fecha).ToList();
 
-                // Incrementar contador de sesiones completadas del mes
-                IncrementarSesionesCompletadas(turno.Fecha);
+                var cliente = Clientes.FirstOrDefault(c => c.IdCliente == turno.IdCliente);
+                if (cliente != null)
+                {
+                    cliente.Sesiones--;
+                    _databaseService.UpdateItem(cliente);
 
-                // Agregar el turno a la lista de completados
-                CompletedSessionsList.Add(turno);
-                CompletedSessionsCollectionView.ItemsSource = CompletedSessionsList.OrderBy(t => t.Fecha).ToList();
+                    if (cliente.Sesiones <= 0)
+                    {
+                        DisplayAlert("Información", $"{cliente.NombreCompleto} tiene 0 sesiones restantes.", "OK");
+                    }
+                }
+
+                UpdateCompletedSessionsCount();
             }
-        }
-
-        private void IncrementarSesionesCompletadas(DateTime fecha)
-        {
-            var currentMonthKey = DateTime.Now.ToString("yyyy-MM");
-            var completedSessions = Preferences.Get(currentMonthKey, 0);
-            Preferences.Set(currentMonthKey, completedSessions + 1);
-            CompletedSessions = completedSessions + 1;
         }
 
         private void EditarTurno_Clicked(object sender, EventArgs e)
@@ -144,13 +123,18 @@ namespace KineApp.Views
             }
         }
 
-        protected override void OnAppearing()
+        private async void Button_Clicked_Cliente(object sender, EventArgs e)
         {
-            base.OnAppearing();
-            LoadData(); // Asegúrate de recargar los datos para actualizar la lista de turnos
-            LoadCompletedSessions();
-            LoadCompletedSessionsList();
-            BindingContext = this;
+            if (sender is Button button && button.BindingContext is ClienteModel selectedCliente)
+            {
+                await Navigation.PushAsync(new ClienteIdInfoPage(selectedCliente.IdCliente));
+            }
+        }
+
+        private void UpdateCompletedSessionsCount()
+        {
+            var currentMonthCompletedSessions = CompletedTurnos.Count;
+            CompletedSessionsCountLabel.Text = $"Sesiones completadas este mes: {currentMonthCompletedSessions}";
         }
     }
 }

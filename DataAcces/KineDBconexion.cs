@@ -54,9 +54,6 @@ namespace KineApp.DataAcces
             _database.Update(item);
         }
 
-        public void DeleteItem<T>(T item)
-        {
-            _database.Delete(item);
-        }
+
     }
 }

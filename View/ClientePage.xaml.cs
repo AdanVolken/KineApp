@@ -107,10 +107,17 @@ namespace KineApp.Views
                     _clienteEditando.Estampillado = EstampilladoPicker.SelectedItem.ToString() == "Sí";
 
                     _databaseService.UpdateItem(_clienteEditando);
+
+                    // Actualizar las colecciones
+                    var clienteIndex = _clientes.IndexOf(_clienteEditando);
+                    _clientes[clienteIndex] = _clienteEditando;
+                    _clientesFiltrados[clienteIndex] = _clienteEditando;
+
                     await DisplayAlert("Éxito", "Cliente actualizado correctamente", "OK");
                     _clienteEditando = null;
                 }
 
+                ClientesCollectionView.ItemsSource = _clientesFiltrados.OrderBy(c => c.Nombre).ThenBy(c => c.Apellido);
                 ClearForm();
             }
             catch (Exception ex)
