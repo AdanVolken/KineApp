@@ -4,6 +4,7 @@ using KineApp.DataAcces;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Maui.Storage;
 
 namespace KineApp.Views
 {
@@ -13,19 +14,26 @@ namespace KineApp.Views
         private SesionModel _turnoEditando;
         public ObservableCollection<SesionModel> Turnos { get; set; }
         public ObservableCollection<ClienteModel> Clientes { get; set; }
+        private int CompletedSessions { get; set; }
+        public ObservableCollection<SesionModel> CompletedSessionsList { get; set; }
 
         public TurnosPage()
         {
             InitializeComponent();
             _databaseService = new KineDBconexion();
             LoadData();
+            LoadCompletedSessions();
+            LoadCompletedSessionsList();
             BindingContext = this;
         }
 
         private void LoadData()
         {
             Clientes = new ObservableCollection<ClienteModel>(_databaseService.GetItems<ClienteModel>());
-            var turnosList = _databaseService.GetItems<SesionModel>().OrderBy(t => t.Fecha).ToList();
+            var turnosList = _databaseService.GetItems<SesionModel>()
+                .Where(t => !t.Completado) // Excluir sesiones completadas
+                .OrderBy(t => t.Fecha)
+                .ToList();
 
             // Asignar los nombres de los clientes a los turnos
             foreach (var turno in turnosList)
@@ -34,6 +42,25 @@ namespace KineApp.Views
             }
 
             Turnos = new ObservableCollection<SesionModel>(turnosList);
+        }
+
+        private void LoadCompletedSessions()
+        {
+            var currentMonthKey = DateTime.Now.ToString("yyyy-MM");
+            CompletedSessions = Preferences.Get(currentMonthKey, 0);
+        }
+
+        private void LoadCompletedSessionsList()
+        {
+            var firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+            CompletedSessionsList = new ObservableCollection<SesionModel>(
+                _databaseService.GetItems<SesionModel>()
+                    .Where(t => t.Completado && t.Fecha >= firstDayOfMonth && t.Fecha <= lastDayOfMonth)
+                    .OrderBy(t => t.Fecha)
+                    .ToList()
+            );
         }
 
         private void GuardarTurno_Clicked(object sender, EventArgs e)
@@ -64,7 +91,8 @@ namespace KineApp.Views
                 {
                     IdCliente = cliente.IdCliente,
                     Fecha = fechaCompleta,
-                    Cliente = cliente
+                    Cliente = cliente,
+                    Completado = false
                 };
                 _databaseService.InsertItem(nuevoTurno);
                 Turnos.Add(nuevoTurno);
@@ -81,16 +109,27 @@ namespace KineApp.Views
             var turno = (sender as Button).BindingContext as SesionModel;
             if (turno != null)
             {
-                Turnos.Remove(turno);
-                _databaseService.DeleteItem(turno);
+                turno.Completado = true;
+                _databaseService.UpdateItem(turno);
 
-                var cliente = Clientes.FirstOrDefault(c => c.IdCliente == turno.IdCliente);
-                if (cliente != null)
-                {
-                    cliente.Sesiones--;
-                    _databaseService.UpdateItem(cliente);
-                }
+                // Remover el turno de la lista visible
+                Turnos.Remove(turno);
+
+                // Incrementar contador de sesiones completadas del mes
+                IncrementarSesionesCompletadas(turno.Fecha);
+
+                // Agregar el turno a la lista de completados
+                CompletedSessionsList.Add(turno);
+                CompletedSessionsCollectionView.ItemsSource = CompletedSessionsList.OrderBy(t => t.Fecha).ToList();
             }
+        }
+
+        private void IncrementarSesionesCompletadas(DateTime fecha)
+        {
+            var currentMonthKey = DateTime.Now.ToString("yyyy-MM");
+            var completedSessions = Preferences.Get(currentMonthKey, 0);
+            Preferences.Set(currentMonthKey, completedSessions + 1);
+            CompletedSessions = completedSessions + 1;
         }
 
         private void EditarTurno_Clicked(object sender, EventArgs e)
@@ -103,6 +142,15 @@ namespace KineApp.Views
                 FechaPicker.Date = turno.Fecha.Date;
                 HoraPicker.Time = turno.Fecha.TimeOfDay;
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadData(); // Asegúrate de recargar los datos para actualizar la lista de turnos
+            LoadCompletedSessions();
+            LoadCompletedSessionsList();
+            BindingContext = this;
         }
     }
 }

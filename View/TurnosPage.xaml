@@ -8,9 +8,9 @@
              Title="Gestión de Turnos" Padding="15" >
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout >
+            <StackLayout>
                 <!-- Formulario para agregar turnos -->
-                <Frame CornerRadius="10" Padding="20" Margin="0,0,0,10">
+                <Frame CornerRadius="10" Padding="20" Margin="0,0,0,10" BackgroundColor="#6b47e9">
                     <StackLayout Spacing="10">
                         <Label Text="Agregar Turno" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center"/>
                         <Picker x:Name="ClientePicker" Title="Seleccionar Cliente"
@@ -18,7 +18,7 @@
                                 ItemDisplayBinding="{Binding NombreCompleto}" />
                         <DatePicker x:Name="FechaPicker" Format="dd/MM/yyyy" />
                         <TimePicker x:Name="HoraPicker" Format="HH:mm" />
-                        <Button Text="Guardar" Clicked="GuardarTurno_Clicked" BackgroundColor="#6b47e9" TextColor="White"/>
+                        <Button Text="Guardar" Clicked="GuardarTurno_Clicked" BackgroundColor="#6b47e0" TextColor="White"/>
                     </StackLayout>
                 </Frame>
 
@@ -46,6 +46,23 @@
                                         <Button Text="Completado" Clicked="CompletadoTurno_Clicked" Grid.Column="0" BackgroundColor="#6b47e9" TextColor="White"/>
                                         <Button Text="Editar" Clicked="EditarTurno_Clicked" Grid.Column="1" BackgroundColor="#6b47e9" TextColor="White"/>
                                     </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Contador de sesiones completadas -->
+                <Label Text="{Binding CompletedSessions, StringFormat='Sesiones Completadas este Mes: {0}'}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" Margin="0,20,0,0" />
+                <!-- Lista de sesiones completadas -->
+                <Label Text="Sesiones Completadas" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
+                <CollectionView x:Name="CompletedSessionsCollectionView" ItemsSource="{Binding CompletedSessionsList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="10" Padding="10" BackgroundColor="#e0e0e0" Margin="0,0,0,10">
+                                <StackLayout>
+                                    <Label Text="{Binding Cliente.NombreCompleto}" FontSize="18" />
+                                    <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="18" />
                                 </StackLayout>
                             </Frame>
                         </DataTemplate>

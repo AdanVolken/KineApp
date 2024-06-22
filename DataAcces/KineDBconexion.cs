@@ -1,4 +1,6 @@
 ﻿using SQLite;
+using KineApp.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Maui.Storage;
@@ -33,7 +35,9 @@ namespace KineApp.DataAcces
             }
 
             _database = new SQLiteConnection(dbPath);
-        }
+      }
+
+
 
         public List<T> GetItems<T>() where T : new()
         {
@@ -42,18 +46,14 @@ namespace KineApp.DataAcces
 
         public void InsertItem<T>(T item)
         {
-            // Implementación para insertar el item en la base de datos
-            // Esto puede variar dependiendo de cómo estés manejando la base de datos.
-            // Aquí un ejemplo simple:
-
-
             _database.Insert(item);
-
         }
+
         public void UpdateItem<T>(T item)
         {
             _database.Update(item);
         }
+
         public void DeleteItem<T>(T item)
         {
             _database.Delete(item);

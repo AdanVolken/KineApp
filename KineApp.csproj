@@ -26,10 +26,11 @@
 
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <MauiIcon Include="Resources\AppIcon\icono.jpeg" Color="White" ForegroundSacle="0.55" />
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+    <MauiSplashScreen Include="Resources\Splash\icono.jpeg" Color="#9ad9ea" BaseSize="128,128"/>
+    <MauiSplashScreen Include="Resources\Splash\splash.svg"  />
 
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
@@ -40,6 +41,11 @@
 
     <!-- Raw Assets -->
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\AppIcon\Icono.jpeg" />
+    <None Remove="Resources\Splash\Icono.jpeg" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,6 +10,7 @@ namespace KineApp.Model
 
         public int IdCliente { get; set; }
         public DateTime Fecha { get; set; }
+        public bool Completado{ get; set; }
 
         [Ignore]
         public ClienteModel Cliente { get; set; }
