@@ -37,6 +37,12 @@ namespace KineApp.DataAcces
             _database = new SQLiteConnection(dbPath);
       }
 
+        public void ClearTables()
+        {
+            _database.Execute("DELETE FROM Cliente");
+            _database.Execute("DELETE FROM Sesion");
+        }
+
 
 
         public List<T> GetItems<T>() where T : new()

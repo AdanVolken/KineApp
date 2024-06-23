@@ -23,7 +23,7 @@
                 </Frame>
 
                 <!-- Lista de turnos -->
-                <Label Text="Lista de Turnos" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
+                <Label x:Name="SessionsCompletedCountLabel" Text="Lista de Turnos" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
                 <CollectionView x:Name="TurnosCollectionView" ItemsSource="{Binding Turnos}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
