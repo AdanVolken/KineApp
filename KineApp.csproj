@@ -24,13 +24,23 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidKeyStore>False</AndroidKeyStore>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+    <AndroidKeyStore>False</AndroidKeyStore>
+  </PropertyGroup>
+
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\icono.jpeg" Color="White" ForegroundSacle="0.55" />
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\icono.jpeg" Color="#9ad9ea" BaseSize="128,128"/>
-    <MauiSplashScreen Include="Resources\Splash\splash.svg"  />
+    <MauiSplashScreen Include="Resources\Splash\fondo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </MauiSplashScreen>
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" />
 
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
@@ -44,8 +54,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\AppIcon\Icono.jpeg" />
-    <None Remove="Resources\Splash\Icono.jpeg" />
+    <None Remove="Resources\AppIcon\icono.png" />
+    <None Remove="Resources\Splash\fondo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -98,6 +108,12 @@
 
   <ItemGroup>
     <Folder Include="Resources\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\icono.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </MauiIcon>
   </ItemGroup>
 
   <ItemGroup>
